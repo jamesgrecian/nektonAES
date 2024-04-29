@@ -14,7 +14,10 @@ require(tidyverse)
 require(sf)
 sf::sf_use_s2(FALSE)
 
+#####################
 ### load raw data ###
+#####################
+
 mycto <- read_csv("data/myctophids.csv")
 krill <- read_csv("data/krill.csv")
 cepha <- read_csv("data/cephalopods.csv")
@@ -46,7 +49,7 @@ mycto$group <- "myctophids"
 names(mycto) <- c("species", "date", "lon", "lat", "group")
 mycto <- mycto |> dplyr::select("group", "species", "date", "lon", "lat")
 
-krill$group <- krill$species
+krill$group <- "krill"
 krill <- krill |> dplyr::select("group", "species", "DATE", "LONGITUDE", "LATITUDE")
 names(krill) <- c("group", "species", "date", "lon", "lat")
 
@@ -68,13 +71,21 @@ notol$date <- NA
 notol <- notol |> dplyr::select("group", "NAME", "date", "LON", "LAT")
 names(notol) <- c("group", "species", "date", "lon", "lat")
 
+###########################
 ### combine data frames ###
+###########################
+
 dat <- rbind(mycto, krill, cepha, bathy, pleur, notol)
 dat <- dat |> arrange(group, species, date)
 dat <- dat |> filter(lat < -40)
 
+####################
 ### drop species ###
-# with too few points, or ones that based on previous testing won't run due to clustering
+####################
+
+# not all cephalopod species in the data frame were used in the Xavier paper
+# some have too few points
+# some won't run based on previous testing due to clustering
 dat |> 
   group_by(species) |> 
   tally() |> 
@@ -87,10 +98,18 @@ dat <- dat |>
                          "Mastigoteuthis psychrophila", "Moroteuthis knipovitchi", "Parateuthis tunicata", "Semirossia patagonica",
                          "Taningia danae", "Teuthowenia pellucida", "Abraliopsis gilchristi"))
 
+# reorder for easier outputs later on...
+dat <- dat |> mutate(group = factor(group, levels = c("fish", "myctophids", "krill", "cephalopods")),
+                     species = factor(species))
+dat <- dat |> arrange(group, species)
+
+
+#########################
 ### background points ###
+#########################
 
 # define stereographic projection around Antarctica
-prj <- "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
+prj <- "+proj=stere +lat_0=-90 +lat_ts=-70 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" 
 
 # append xy
 dat[c("x", "y")] <- dat %>% st_as_sf(coords = c("lon", "lat")) %>% 
@@ -132,6 +151,7 @@ pseudo$PresAbs <- 0
 # combine original data with pseudo absences
 dat <- rbind(dat, pseudo)
 dat <- dat %>% dplyr::select("group", "species", "date", "PresAbs", "lon", "lat", "x", "y")
+dat <- dat |> arrange(group, species, PresAbs)
 
 # plot to check
 ggplot() + 
