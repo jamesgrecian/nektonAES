@@ -12,8 +12,7 @@
 polar_mask <- function(radius_size = 5750000){
   
   # define projection
-  crs_polar <- "+proj=stere +lat_0=-90 +lat_ts=-70 +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"
-  
+  crs_polar <- "+proj=stere +lat_0=-90 +lat_ts=-70 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs" 
   # projection outline
   polar_outline <- st_buffer(st_point(x = c(0, 0)), dist = radius_size) |>
     st_sfc(crs = crs_polar)

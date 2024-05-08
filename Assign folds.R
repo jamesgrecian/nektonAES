@@ -55,7 +55,7 @@ for(k in c(1:28)){
   while(sum(check-1) < 20){ # 10 folds and need presences in both analysis and assessment groups 10 * 2 = 20
     check <- NULL
     sub_df <- dat_sf %>% filter(species == unique(species)[k])
-    block_folds <- spatial_block_cv(sub_df, v = 10, square = F, cellsize = 500000)
+    block_folds <- spatial_block_cv(sub_df, v = 10, square = F, cellsize = 50000, method = "snake")
     for (j in 1:10){
       check <- c(check,
                  block_folds$splits[[j]] %>% analysis %>% pull(PresAbs) %>% unique,
@@ -66,6 +66,6 @@ for(k in c(1:28)){
 }
 
 # save folds object
-saveRDS(folds, "data/folds_weights.rds")
+saveRDS(folds, "data/folds_weights_50_snake.rds")
 
 # ends
