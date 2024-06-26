@@ -35,11 +35,11 @@ source("R/tidy_covariate_selection.R")
 ############
 
 # load original data
-dat <- readRDS("data/presence_absence_data_10k_with_covariates_2024-04-25.rds")
+dat <- readRDS("data/presence_absence_data_10k_with_covariates_2024-06-17.rds")
 
 # load pre-folded data
 # NB this is an sf object outputed by spatialsample
-folds <- readRDS("data/folds_weights.rds")
+folds <- readRDS("data/folds_weights_v2.rds")
 
 #######################################
 ### Set up candidate covariate sets ###
@@ -478,7 +478,7 @@ tidy_results[[28]] <- manual_gam_selection(rev_f, folds[[28]])
 ### Save results ###
 ####################
 
-saveRDS(tidy_results, "data/tidy_results_weights.rds")
+saveRDS(tidy_results, "data/tidy_results_weights_v2.rds")
 
 # ends
 

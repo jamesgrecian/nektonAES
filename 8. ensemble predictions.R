@@ -25,8 +25,8 @@ require(orsifronts)
 quantile.hardhat_importance_weights <- \(x, ...) rep(NA, length(x))
 
 # load data
-dat_all <- readRDS("data/presence_absence_data_10k_with_covariates_2024-04-25.rds")
-folds_all <- readRDS("data/folds_weights.rds")
+dat_all <- readRDS("data/presence_absence_data_10k_with_covariates_2024-06-17.rds")
+folds_all <- readRDS("data/folds_weights_v2.rds")
 
 ################################
 ### Predict for each species ###
@@ -35,88 +35,98 @@ folds_all <- readRDS("data/folds_weights.rds")
 source("R/predict_ensemble.R")
 
 # 1. Bathylagus antarcticus
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_01.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_01_v2.rds"),
                  folds = folds_all[[1]],
                  dat = dat_all |> filter(species == unique(species)[1]),
-                 plot_nm = "figures/species 01 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_01.rds")
+                 plot_nm = "figures/species 01 ensemble plot_2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_01_v2.rds")
 
 # 2. Notolepis coatsorum
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_02.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_02_v2.rds"),
                  folds = folds_all[[2]],
                  dat = dat_all |> filter(species == unique(species)[2]),
-                 plot_nm = "figures/species 02 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_02.rds")
+                 plot_nm = "figures/species 02 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_02_v2.rds")
 
 # 3. Pleuragramma antarctica  
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_03.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_03_v2.rds"),
                  folds = folds_all[[3]],
                  dat = dat_all |> filter(species == unique(species)[3]),
-                 plot_nm = "figures/species 03 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_03.rds")
+                 plot_nm = "figures/species 03 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_03_v2.rds")
 
 # 4. Electrona antarctica     
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_04.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_04_v2.rds"),
                  folds = folds_all[[4]],
                  dat = dat_all |> filter(species == unique(species)[4]),
-                 plot_nm = "figures/species 04 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_04.rds")
+                 plot_nm = "figures/species 04 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_04_v2.rds")
 
 # 5. Electrona carlsbergi
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_05.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_05_v2.rds"),
                  folds = folds_all[[5]],
                  dat = dat_all |> filter(species == unique(species)[5]),
-                 plot_nm = "figures/species 05 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_05.rds")
+                 plot_nm = "figures/species 05 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_05_v2.rds")
 
 # 6. Gymnoscopelus bolini
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_06.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_06_v2.rds"),
                  folds = folds_all[[6]],
                  dat = dat_all |> filter(species == unique(species)[6]),
-                 plot_nm = "figures/species 06 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_06.rds")
+                 plot_nm = "figures/species 06 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_06_v2.rds")
+
+
+
 
 # 7.Gymnoscopelus braueri
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_07.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_07_v2.rds"),
                  folds = folds_all[[7]],
                  dat = dat_all |> filter(species == unique(species)[7]),
-                 plot_nm = "figures/species 07 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_07.rds")
+                 plot_nm = "figures/species 07 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_07_v2.rds")
 
 # 8. Gymnoscopelus fraseri 
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_08.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_08_v2.rds"),
                  folds = folds_all[[8]],
                  dat = dat_all |> filter(species == unique(species)[8]),
-                 plot_nm = "figures/species 08 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_08.rds")
+                 plot_nm = "figures/species 08 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_08_v2.rds")
 
 # 9. Gymnoscopelus nicholsi
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_09.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_09_v2.rds"),
                  folds = folds_all[[9]],
                  dat = dat_all |> filter(species == unique(species)[9]),
-                 plot_nm = "figures/species 09 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_09.rds")
+                 plot_nm = "figures/species 09 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_09_v2.rds")
 
 # 10. Gymnoscopelus opisthopterus
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_10.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_10_v2.rds"),
                  folds = folds_all[[10]],
                  dat = dat_all |> filter(species == unique(species)[10]),
-                 plot_nm = "figures/species 10 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_10.rds")
+                 plot_nm = "figures/species 10 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_10_v2.rds")
 
 # 11. Krefftichthys anderssoni
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_11.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_11_v2.rds"),
                  folds = folds_all[[11]],
                  dat = dat_all |> filter(species == unique(species)[11]),
-                 plot_nm = "figures/species 11 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_11.rds")
+                 plot_nm = "figures/species 11 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_11_v2.rds")
 
 # 12. Protomyctophum bolini
-predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_12.rds"),
+predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_12_v2.rds"),
                  folds = folds_all[[12]],
                  dat = dat_all |> filter(species == unique(species)[12]),
-                 plot_nm = "figures/species 12 ensemble plot.jpg",
-                 file_nm = "data/ensemble model outputs/ensemble_raster_12.rds")
+                 plot_nm = "figures/species 12 ensemble plot 2024-06-21.jpg",
+                 file_nm = "data/ensemble model outputs/ensemble_raster_12_v2.rds")
+
+
+
+
+
+
+
 
 # 13.Protomyctophum tenisoni
 predict_ensemble(model_df = readRDS("data/ensemble model outputs/model_df_13.rds"),
