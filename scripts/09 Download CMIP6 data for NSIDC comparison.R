@@ -81,7 +81,7 @@ cmip_root_set("/Users/home/ANTSIE data") # specify root directory
 options(timeout = 1200)            # downloading from server so specify how long to keep connection open (will fail if not defined)
 cmip_download(results)
 
-# Pass the downloaded files to thecdo bash script to process from native grid to regular 1x1 degree grid
+# Pass the downloaded files to the cdo bash script to process from native grid to regular 1x1 degree grid
 
 # ends
 
