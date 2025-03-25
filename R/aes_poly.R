@@ -5,13 +5,18 @@
 # 2024-05-01
 
 # Adapted from Reisinger marine predator AES code
-
+# alternatively provide fixed quantile `q` and ignore `prob`
 # input is a raster and the probability threshold
 
-aes_poly <- function(r, prob){
+aes_poly <- function(r, prob = NULL, q = NULL){
   
-  # Calculate quantiles
-  q <- quantile(r, p = prob)
+  if(is.null(q)){
+    # Calculate quantiles
+    q <- quantile(r, p = prob)
+  }
+  if(is.null(prob)){
+    q <- q
+  }
   
   # Threshold raster based on quantiles
   r[r < q] <- NA

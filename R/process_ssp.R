@@ -3,7 +3,7 @@
 #####################################
 
 # input is the netcdf file AFTER it has been processed by the cdo scripts
-# output is the austral average covariate for 2070-2100
+# output is the austral average covariate for 2071-2100
 
 # 2024-07-01
 
@@ -18,7 +18,7 @@ process_ssp <- function(path, project = T){
   
   cat("object contains", raster::nlayers(r), "data layers\n") # check it contains 1980 layers at start
   
-  r <- subset(r, 673:1032) # trim to 1980 to 2010
+  r <- subset(r, 673:1032) # trim to 2071 to 2100
 
   # then generate austral summer index - October to March for remaining 30 years
   index <- c(seq(1, 360, 12),
