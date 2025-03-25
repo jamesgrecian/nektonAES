@@ -3,7 +3,7 @@
 #########################################
 
 # input is the netcdf file AFTER it has been processed by the cdo scripts
-# output is the austral average covariate for 1980-2010
+# output is the austral average covariate for 1981-2010
 
 # 2024-06-20
 
@@ -11,23 +11,23 @@ process_hist <- function(path, project = T){
   
   # historical files have data from 1850 to 2014
   # 165 years * 12 months = 1980 layers
-  # trim to 1980 to 2010
-  # layer 1561 should be 1980
+  # trim to 1981 to 2010
+  # layer 1573 should be 1981
   # layer 1932 is 2010.12.16 
   hist <- stack(path)
   
   cat("object contains", raster::nlayers(hist), "data layers\n") # check it contains 1980 layers at start
   
-  hist <- subset(hist, 1561:1932) # trim to 1980 to 2010
+  hist <- subset(hist, 1573:1932) # trim to 1981 to 2010
   
-  # then generate austral summer index - October to March for remaining 31 years
-  # 31 = 12 * 31
-  index <- c(seq(1, 372, 12),
-             seq(2, 372, 12),
-             seq(3, 372, 12),
-             seq(10, 372, 12),
-             seq(11, 372, 12),
-             seq(12, 372, 12))
+  # then generate austral summer index - October to March for remaining 30 years
+  # 360 = 12 * 30
+  index <- c(seq(1, 360, 12),
+             seq(2, 360, 12),
+             seq(3, 360, 12),
+             seq(10, 360, 12),
+             seq(11, 360, 12),
+             seq(12, 360, 12))
   index <- sort(index)
   
   # process...
